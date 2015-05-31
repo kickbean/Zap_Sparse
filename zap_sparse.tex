@@ -115,7 +115,9 @@
 % note need leading \protect in front of \\ to get a newline within \thanks as
 % \\ is fragile and will error, could use \hfil\break instead.
 % <-this % stops a space
-\thanks{}}
+\thanks{L. An is with Department of Electrical and Computer Engineering, University of California, Riverside, CA 92521, USA. (e-mail: lan004@ucr.edu)}
+\thanks{S. Yang is with College of Electronics and Information Engineering, Sichuan University, Chengdu 610064, China. (e-mail: syang@scu.edu.cn)}
+}
 
 % note the % following the last \IEEEmembership and also \thanks -
 % these prevent an unwanted space from occurring between the last author name
@@ -138,7 +140,7 @@
 
 
 % The paper headers
-\markboth{IEEE Intelligent System}%
+\markboth{IEEE Intelligent Systems}%
 {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of
 IEEEtran.cls for Computer Society Journals}
 % The only time the second header will appear is for the odd numbered pages
@@ -156,11 +158,11 @@ IEEEtran.cls for Computer Society Journals}
 \IEEEcompsoctitleabstractindextext{%
 \begin{abstract}
 %\boldmath
-The surge of multimedia contents being made available online has attracted more users. As a new advertising platform, more advertisements have been presented online due to the increasing user population and reduced advertising cost. On the other hand, a large portion of revenue for major companies such as Google and Facebook is created by online advertisements. Hence, for both advertiser and advertisement hosts, effective advertisements targeting and delivering is of great interest and importance. In this paper, we quantify users' advertisement viewing experience based on their facial expression responses and propose a metric termed moment-to-moment zapping probability (MMZP) for predicting users' ``zapping'', i.e. ``skipping'' behavior. Insights are discovered by analyzing MMZP and such knowledge may help improve the advertising effectiveness.
+The surge of multimedia contents being made available online has attracted more users. As a new advertising platform, more advertisements have been presented online due to the increased user population and reduced advertising cost. In addition, a large portion of revenue for major IT companies such as Google and Facebook is created by online advertisements. Hence, for both advertiser and advertisement hosts, effective advertisement targeting and delivering is of great interest and importance. In this paper, we quantify users' advertisement viewing experience based on their facial expression responses and propose a metric termed moment-to-moment zapping probability (MMZP) for predicting users' ``zapping'', i.e. ``skipping'' behavior. Insights are discovered by analyzing MMZP and such knowledge may help improve the advertising effectiveness.
 
 \end{abstract}
 \begin{keywords}
-Online advertising, user behavior, facial expression, zapping probability
+Online advertising, user behavior, user preference, facial expression, zapping probability
 \end{keywords}}
 
 
@@ -176,19 +178,20 @@ To evaluate the quality of advertising, user behavior study is usually performed
 
 As suggested in~\cite{Abbasi_15}, user behavior is affected by perceptual considerations such as personal feelings. Therefore, in this paper we analyze user's behavior during ad watching using their facial expression responses. As a rich source of implicit communication, facial expression reflects one's spontaneous feeling and can be measured non-intrusively~\cite{Ekman93}. Previous studies show that facial expression can be used to predict zapping behavior when user is watching ads~\cite{Yang_TAC14, Yang_FG15}.  
 
-To study the users' behavior in online advertising, our \textit{first} objective is to predict the moment-to-moment zapping probability (MMZP) from users' facial expression during ad watching. The MMZP reflects users' dynamic interest level to the ad content. By collecting MMZP from diverse group of users watching ads in multiple categories, our \textit{second} objective is to extract user preference information from MMZP. To achieve these goals, we first describe a data collection paradigm and justify why ``smile'' is the expression of the center focus in analyzing users' feedback to an ad. Subsequently, we divide the smile responses into segments, which we term \textit{responselet}, and learn a dictionary of responselet. Predictions of MMZP are made by classifying the smile responses using their sparse coefficients as features learned from the responselet dictionary. From the predictions of MMZP, rich knowledge about user preference is discovered, which is valuable for better understanding and promoting online ads. 
+To study the users' behavior in online advertising, our \textit{first} objective is to predict the moment-to-moment zapping probability (MMZP) from users' facial expression during ad watching. The MMZP reflects users' dynamic interest level to the ad content. By collecting MMZP from diverse group of users watching ads in multiple categories, our \textit{second} objective is to extract user preference information from MMZP. To achieve these goals, we first describe a data collection paradigm and justify why ``smile'' is the expression of the central focus in analyzing users' feedback to an ad. Subsequently, we divide the smile responses into segments, which we term \textit{responselet}, and learn a dictionary of responselet. Predictions of MMZP are made by classifying the smile responses using their sparse coefficients as features learned from the responselet dictionary. From the predictions of MMZP, rich knowledge about user preference is discovered, which is valuable for better understanding and promoting online ads. 
 
 
 \section{Related Work}
 
-To study the spontaneous consumer ad-watching facial expressions, an interesting study was conducted by McDuff \textit{et al.}~\cite{McDuff13} who collected naturalistic facial response from people watching the US presidential debate in 2012. They found out that voter preference can be predicted with an average accuracy of over 73\% based on facial expression responses. The AMFED dataset was introduced in~\cite{amfed}, providing both spontaneous facial expression videos and self-report responses. Although this dataset does not concern users' zapping behavior, it provides a large testbed for ``in-the-wild'' consumer ad watching expression analysis. In a more realistic case, consumers may not be cooperative and can switch away from the viewing content at any moment. Thus, it is important and challenging for advertisers to retain users' attention during the playing of an ad~\cite{Elpers03}. Teixeira \textit{et al.}~\cite{Teixeira12} analyzed the user's zapping behavior using joy and surprise expressions. They found that the joy response highly correlates with user's zapping behavior. It was suggested retaining a user's attention can produce desirable communication effects increase his/her interest as a potential consumer. 
+To study the spontaneous consumer facial expressions during ad watching, an interesting study was conducted by McDuff \textit{et al.}~\cite{McDuff13} who collected naturalistic facial response from people watching the US presidential debate in 2012. They found out that voter preference can be predicted with an average accuracy of over 73\% based on facial expression responses. The AMFED dataset was introduced in~\cite{amfed}, providing both spontaneous facial expression videos and self-report responses. Although this dataset does not concern users' zapping behavior, it provides a large testbed for ``in-the-wild'' consumer ad watching expression analysis. In a more realistic case, consumers may not be cooperative and can switch away from the viewing content at any moment. Thus, it is important and challenging for advertisers to retain users' attention during the playing of an ad~\cite{Elpers03}. Teixeira \textit{et al.}~\cite{Teixeira12} analyzed the user's zapping behavior using joy and surprise expressions. They found that the joy response highly correlates with user's zapping behavior. It was suggested that retaining a user's attention can produce desirable communication effects increase his/her interest as a potential consumer. 
 
 
 \section{Experimental Design}
 
 \subsection{Facial Expression Data}
 
-A facial expression dataset for online advertising analysis was introduced in~\cite{Yang_FG15} and are used in our experiments. In this dataset, 51 subjects were invited to watch 12 ads, each of which ranges from 30 to 90 seconds. Among those subjects, 16 are female and 35 are male. Regarding the ethnicity, there are 9 Caucasians, 14 Asian Americans, 18 Asians, 8 Hispanics, and 2 African Americans. When watching an ad, a user can choose to finish watching or zap before it ends. In either case, 30 seconds were allowed for the user to neutralize their emotions. The selected 8 ads covers two most popular categories including \textit{Car} and \textit{Fast Food}. The ads have various entertaining levels based on their contents. Here, we a scalar from 0 to 10 to rate the entertaining level of an ad from low to high. The scores for the ads were rated by an independent group of subjects and the averaged scores are used. Table~\ref{table:ads} lists the ads information. The \textit{Car} ads are more entertaining than the \textit{Fast Food} ads with \textit{Toyota} and \textit{Nissan} being the two most amusing ads. All ads are available on primary websites such as YouTube. The playback order for these ads were randomized for each subject to diminish the order effect. 
+A facial expression dataset for online advertising analysis~\cite{Yang_FG15} is used in our experiments. In this dataset, 51 subjects were invited to watch multiple ads, each of which ranges from 30 to 90 seconds. Among those subjects, 16 are female and 35 are male. Regarding ethnicity, there are 9 Caucasians, 14 Asian Americans, 18 Asians, 8 Hispanics, and 2 African Americans. When watching an ad, a user can choose to finish watching or zap before it ends. In either case, 30 seconds were allowed for the user to neutralize their emotions. The selected 8 ads in our experiments cover two most popular categories: \textit{Car} and \textit{Fast Food}. These ads have various entertaining levels based on their contents. Here, we use a scalar from 0 to 10 to rate the entertaining level of an ad from low to high. The scores for the ads were rated by an independent group of subjects and the averaged scores are used. Table~\ref{table:ads} lists the ads information. In general the \textit{Car} ads are more entertaining than the \textit{Fast Food} ads with \textit{Toyota} and \textit{Nissan} being the two most amusing ads. All ads are available on primary websites such as YouTube. The playback order for these ads were randomized for each subject to diminish the ordering impact. 
+
 
 \begin{table*}[!t]
 \caption{Advertisements used in our experiments} \label{table:ads}
@@ -209,36 +212,26 @@ Category & Brand & Ad Name & Entertaining Level & Length (in \textit{s}) \\ \mid
                             & Pizza Hut             & Make It Great   & 3 & 30 \\ %\cmidrule{2-3}
 \bottomrule
 \end{tabular}
-
-\end{table*}
-
-%The ads in Table~\ref{table:ads} can be accessed on Youtube by directly searching the brands and the ad names. In total 51 people have participated in our data collection. In terms of gender, there are 31\% female and 69\% male. In terms of ethnicity, the dataset includes 40\% Asian, 25\% Euro-American, 16\% African-American, and 19\% other ethnicity groups. 
+\end{table*} 
 
 \subsection{Motivation for Using Smile Response}
 Among common facial expressions, such as \textit{fear} or \textit{sadness}, smile response is leveraged in our method to predict zapping behavior due to the following motivations:
 \begin{itemize}
-\item It is shown by Elper \textit{et al.}~\cite{Elpers03} that the lack of \textit{entertaining} factor in ads is a major reason for zapping. For the ad selection in this dataset, we focus on entertaining factor only. In addition, a large portion of ads aim at amusing, so ads with various entertaining levels are widely available. 
+\item It is shown by Elper \textit{et al.}~\cite{Elpers03} that the lack of \textit{entertaining} factor in ads is a major reason for zapping. For the ad selection in this dataset, we focus on entertaining factor only. In addition, a large number of ads aim at amusing, so ads with various entertaining levels are widely available. 
 
-\item In terms of facial expression response to ad watching, smile directly reflects the entertaining level of ads. It is observed that more than 95\% of the detected expressions are smile in our dataset. A similar observation is also made in the recently published online ad watching dataset, AMFED~\cite{amfed}. 
+\item In terms of facial expression response to ad watching, smile directly reflects the entertaining level of ads. It is observed that more than 95\% of the detected expressions are smile in our dataset. A similar observation is also made recently~\cite{amfed}. 
 
-\item As an extensively studied facial expression, smile and its intensity can be accurately detected on a per frame basis~\cite{Yang_TAC14}. With simple features and an SVM classifier, smile classification can achieve over 95\% in terms of area under the curve (AUC). We direct interested readers to~\cite{Yang_TAC14} for a more detailed description on how to estimate the smile intensity. Examples of smile responses associated with zapping and non-zapping behavior are shown in Fig.~\ref{fig:smile_ex}.
+\item As an extensively studied facial expression, smile and its intensity can be accurately detected on a per frame basis and with simple features and an SVM classifier, smile classification can achieve an area under the curve (AUC) of 0.95~\cite{Yang_TAC14}. Examples of smile responses associated with zapping and non-zapping behavior are shown in Fig.~\ref{fig:smile_ex}. We direct interested readers to~\cite{Yang_TAC14} for a more detailed description on how to estimate the smile intensity.
 
-%The performance of our smile intensity algorithm in terms of the ROC curve and samples of intensity estimation output are shown in Fig.~\ref{fig:smile_response}. We direct interested readers to~\cite{Yang_TAC14} for a more detailed description on how to estimate the smile intensity. More results are shown in Fig.~\ref{fig:smile_ex}. 
+
 \end{itemize}
 
-%\begin{figure}[!ht]
-%\centering
-    %\subfigure[ROC curve for person-independent test]{\includegraphics[width=.46\columnwidth]{fig/smile_roc_test.png}\label{fig:smile_roc_test}}
-    %\subfigure[Sample smile response results]{\includegraphics[width=.46\columnwidth]{fig/smile_response_ex.png}\label{fig:smile_response_ex}}
-%\label{fig:smile_response}
-%\caption{Smile intensity estimation performance}
-%\end{figure}
-
-\begin{figure}[t]
+\begin{figure}[t] 
 \centering
  \subfigure[Zapping]{\includegraphics[width=.5\columnwidth]{fig/response_seq_zap_ex.png}\label{fig:ex_zap}}
 \subfigure[Non-zapping]{\includegraphics[width=.7\columnwidth]{fig/smile_seq_non_ex.png}\label{fig:ex_non}}
-\caption{Examples of smile responses for zapping and non-zapping behavior.\label{fig:smile_ex}}
+\caption{Examples of smile responses for zapping and non-zapping behavior. For the case of zapping, smile response is very low compared to the non-zapping case.}
+\label{fig:smile_ex}
 \end{figure}
 
 \section{Methodology}%: Responselet Dictionary Learning}
@@ -251,17 +244,17 @@ Our objective is to predict MMZP given smile responses and it is formulated as a
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=.85\columnwidth]{fig/ad_len_distr.png}
-	\caption{The zapping distribution. We use Gaussian mixture model to fit the data.  The left-most and right-most Gaussians well capture the distinctiveness of zapping and non-zapping classes, respectively. The middle Gaussian with high variance represents the sequences that are on the boundary of two classes. We use the mean of the second Gaussian, 0.56, as a data-driven threshold to distinguish zapping from non-zapping.}
+	\caption{The zapping distribution. We use Gaussian mixture model to fit the data. The left-most and right-most Gaussians well capture the distinctiveness of zapping and non-zapping classes, respectively. The middle Gaussian with high variance represents the sequences that are on the boundary of two classes. We use the mean of the second Gaussian, 0.56, as a data-driven threshold to distinguish zapping from non-zapping.}
 	\label{fig:ad_len_distr}
 \end{figure}
 
-Since the subjects are given the option to zap at any time, the fraction of an ad being watched varies for different participants. Fig.~\ref{fig:ad_len_distr} shows the distribution of ad fraction that is being watched. It can be observed that most ads have been watched at least 80\% of their length. Besides, participants in our experiments tended to zap early if they are not attracted to an ad, as evidenced by the left part of the plot (i.e., 0\% to 30\% has a slightly higher probability). To distinguish zapped and non-zapped cases, a Gaussian mixture model with three components is fitted to the data. As seen in Fig.~\ref{fig:ad_len_distr},the left-most and right-most Gaussian models are with low variance and well capture the distinctiveness of zapping and non-zapping class, respectively. The Gaussian model in the middle with high variance includes the sequences that are on the boundary of two classes. As a result, we empirically select the mean of the second mixture, 0.56, as the threshold to distinguish zapping from non-zapping sequences.
+Since the subjects are given the option to zap at any time, the fraction of an ad being watched varies for different participants. Fig.~\ref{fig:ad_len_distr} shows the distribution of ad fraction that is being watched. It can be observed that most ads have been watched at least 80\% of their length. Besides, participants in our experiments tended to zap early if they are not attracted to an ad, as evidenced by the left part of the plot (i.e., 0\% to 30\% has a slightly higher probability). To distinguish zapped and non-zapped cases, a Gaussian mixture model with three components is fitted to the data. As seen in Fig.~\ref{fig:ad_len_distr}, the left-most and right-most Gaussian models are with low variance and well capture the distinctiveness of zapping and non-zapping class, respectively. The Gaussian model in the middle with high variance includes the sequences that are on the boundary of two classes. As a result, we empirically select the mean of the second mixture, 0.56, as the threshold to distinguish zapping from non-zapping sequences.
 
 
 
 \subsection{Zapping Prediction}
 
-During the training phase, a dictionary of \textit{responselet} (i.e., small segments of smile response) is learned from the recorded subjects' facial responses. Then given a smile responselet, it is first reconstructed by the learned dictionary and the reconstruction coefficients are used as features to train a zapping prediction model. During testing, reconstruction coefficients for a responselet is used for zapping prediction using the trained model. 
+During the training phase, a dictionary of \textit{responselet} (i.e., small segments of smile response) is learned from the recorded subjects' facial responses. Then given a smile responselet, it is first reconstructed by the learned dictionary and the reconstruction coefficients are used as features to train a zapping prediction model. During testing, reconstruction coefficients for a responselet is used for zapping prediction with the trained model. 
 
 \noindent \textbf{Responselet Dictionary Learning.} The history of the dictionary design can be traced back to the fast Fourier transform (FFT) or wavelets. In recently years, dictionary learning for sparse representation has prevailed in signal processing and computer vision tasks. In our case, we learn the dictionary which can well reconstruct the input signal in a sparse manner. 
 
@@ -272,7 +265,7 @@ Concretely, given a set of $n$ smile responselet, $\X=[\x_1, \cdots, \x_n]\in \m
 \min_{\D , \alpha} \sum_{i=1}^n ||\x_i-\D\alpha_i||^2_2 +\lambda ||\alpha_i||_1,
 \end{align}
 
-\noindent where $\forall j=1,\cdots,k, d^T_j d_j \leq 1$. $\lambda$ is a regularization parameter to control the sparsity on $\alpha$. Eq.~(\ref{eq:learn_dict}) can be efficiently solved by an online optimization algorithm~\cite{spams}. 
+\noindent where $\forall j=1,\cdots,k, d^\top_j d_j \leq 1$. $\lambda$ is a regularization parameter to control the sparsity on $\alpha$. Eq.~(\ref{eq:learn_dict}) can be efficiently solved by an online optimization algorithm~\cite{spams}. 
 
 Consider a subject watching an ad as one data sequence, with 51 subjects and 8 ads, there are 408 sequences. As seen in Fig.~\ref{fig:smile_ex}, the dynamics of the smile response has different lengths. Therefore, each sequence is normalized to 100 frames and each responselet contains 10 frames and the stride of the moving window for the next responselet is set to 1. A dictionary with $p=36$ responselet atoms is learned and visualized in Fig.~\ref{fig:dict} with atoms sorted by their absolute gradient variance. 
 
@@ -294,16 +287,14 @@ Consider a subject watching an ad as one data sequence, with 51 subjects and 8 a
 \begin{figure*}[t]
 	\centering
 		\includegraphics[width=.8\textwidth]{fig/ad.png}
-	\caption{MMZP of different ads. The orange lines show the MMZP trends and the blue bars show the corresponding ground truth zapping distribution\color[rgb]{0,0,0}. The axis and labels are the same across all sub-figures and are displayed in the first panel for compactness. We use the same display settings for the rest of the figures.}
+	\caption{MMZP of different ads. The lines show the MMZP trends and the bars show the corresponding ground truth zapping distribution. The axis and labels are the same across all sub-figures and are displayed in the first panel only for compactness. We use the same display settings for the rest of the figures.}
 	\label{fig:ad}
 \end{figure*}
 
 As seen in Fig.~\ref{fig:dict}, the learned dictionary atoms start from flat shape (upper left), gradually vary in slope, and finally transform to bell shapes representing much more fine-grained changes (bottom two rows). The expressiveness of the learned dictionary ensures that a new responselet can be well represented. 
 
 
-\noindent \textbf{Training of Zapping Prediction Model.} 
-
-Having learned the dictionary $\D$, at each frame location, we first divide a given sequence into responselets (i.e., 10 frames segment) in the same way as aforementioned. Then, all responselets are sparsely reconstructed by $\D$ using Eq.~(\ref{eq:learn_dict}) with $\D$ fixed. Thus, for each responselet, we obtain a $p\times 1$ reconstruction coefficient vector. In order to take in account between frame information, we perform mean-pooling of all coefficient vectors available at a certain time, yielding a $p\times 1$ feature vector. Features extracted from training data are used to learn a linear SVM classifier to predict zapping for each moment (i.e., each responselet).
+\noindent \textbf{Training of Zapping Prediction Model.} Having learned the dictionary $\D$, at each frame location, we first divide a given sequence into responselets (i.e., 10 frames per segment) in the same way as aforementioned. Then, all responselets are sparsely reconstructed by $\D$ using Eq.~(\ref{eq:learn_dict}) with $\D$ fixed. Thus, for each responselet, we obtain a $p\times 1$ reconstruction coefficient vector. In order to take in account between frame information, we perform mean-pooling of all coefficient vectors available at a certain time, yielding a $p\times 1$ feature vector. Features extracted from training data are used to learn a linear SVM classifier to predict zapping at each moment (i.e., each responselet).
 
 \noindent \textbf{Testing of Zapping Prediction Model.} The zapping prediction model is evaluated using leave-one-subject-out cross validation. In each fold, one subject is held out for testing, and the others are used for training. Besides mean-pooled features, we have also included several other features as baselines for comparison,  including: mean, max, variance of smile response, smile dynamics (meaning that we directly use the length-normalized smile response as features), and smile histogram~\cite{Yang_TAC14}. In addition, we also compare with direct use of the sparse reconstruction coefficients without mean-pooling.
 
@@ -313,26 +304,26 @@ As shown in Fig.~\ref{fig:cls_performance}, sparse coefficients with mean-poolin
 
 \section{Knowledge Discovery}
 
-As aforementioned, MMZP represents dynamics of users' interest level during the ad watching. In general, increased MMZP correlates with more chances of zapping due to lack of interest in the ad content. To validate this conclusion, we first examine the effectiveness of MMZP, and then provide a series of knowledge discovery from the observations on MMZP changes. 
+As aforementioned, MMZP represents the dynamics of users' interest level during the ad watching. In general, increased MMZP correlates with more chances of zapping due to lack of interest in the ad content. To validate this conclusion, we first examine the effectiveness of MMZP, and then provide a series of knowledge discovery from the observations on MMZP changes. 
 
-\noindent \textbf{MMZP Validation.} To validate the accuracy of MMZP, we first compare it with the actual user zapping behavior. In Fig.~\ref{fig:ad}, the mean MMZP (left axis) of all subjects for each ad is plotted and is compared with the ground truth zapping behavior as shown in the bar plot of each panel (right axis). Note that the zapping behavior is represented by the percentage of an ad being watched, which was recorded during data collection. In general, the fast decreasing pattern of MMZP (less likely to zap) correlates with zapping behavior occurring near the end of an ad (e.g., \textit{Toyota} and \textit{Nissan}). In other words, zapping near the end suggests that more interesting contents were found in the ad by the user. On the other hand, slowly decreasing or stable MMZP indicates more chances of zapping (e.g., \textit{Chevy} and \textit{Pizza Hut}). This is congruent with both zapping distribution in the bar plot and the ad entertaining level of each ad shown in Table~\ref{table:ads}. 
+\noindent \textbf{MMZP Validation.} To validate the accuracy of MMZP, we first compare it with the actual user zapping behavior. In Fig.~\ref{fig:ad}, the mean MMZP (left axis) of all subjects for each ad is plotted and is compared with the ground truth zapping behavior as shown in the bar plot of each panel (right axis). Note that the zapping behavior is represented by the percentage of an ad being watched, which was recorded during data collection. In general, the fast decreasing pattern of MMZP (less likely to zap) correlates with zapping behavior occurring near the end of an ad (e.g., \textit{Toyota} and \textit{Nissan}). In other words, zapping near the end suggests that more interesting contents in the ad were found by the user. On the other hand, slowly decreasing or stable MMZP indicates more chances of zapping (e.g., \textit{Chevy} and \textit{Pizza Hut}). This is congruent with both zapping distribution in the bar plot and the ad entertaining level of each ad as listed in Table~\ref{table:ads}. 
 
-\noindent \textbf{Gender Preference for Ads.} We consider both gender groups watching different ads and discover several interesting findings shown in Fig.~\ref{fig:ad_gend}. Based on the MMZP changes, it can be observed that: 1) \textit{Females} prefer \textit{Honda}, probably because of the embedded story about family and pet along with tender background music; 2) \textit{Males} prefer \textit{Chevy}, probably due to the technology-driven car feature demonstration; 3) \textit{Males} also favor \textit{Jack in the Box}, most likely due to the rock music scene. 
+\noindent \textbf{Gender-biased Ad Preference.} We consider both gender groups watching different ads and discover several interesting findings shown in Fig.~\ref{fig:ad_gend}. Based on the MMZP changes, it can be observed that: 1) \textit{Females} prefer \textit{Honda}, probably because of the embedded story about family and pet along with tender background music; 2) \textit{Males} prefer \textit{Chevy}, probably due to the technology-driven car feature demonstration; 3) \textit{Males} also favor \textit{Jack in the Box}, most likely due to the rock music scene. 
 
 \begin{figure}[h]
 	\centering
 		\includegraphics[width=.9\columnwidth]{fig/ad_gend.png}
-	\caption{Gender preference for different ads. It is observed that the \textit{Male} group prefers \textit{Chevy} and \textit{Jack in the Box} in which technology features and rock music are shown, respectively. The \textit{Female} group enjoys \textit{Honda} more due to its family and pet story setting with tender background music.}
+	\caption{Gender-biased ad preference. The \textit{Male} group prefers \textit{Chevy} and \textit{Jack in the Box} in which technology features and rock music are shown, respectively. The \textit{Female} group enjoys \textit{Honda} more due to its family and pet story setting with tender background music.}
 	\label{fig:ad_gend}
 \end{figure}
 
-\noindent \textbf{Ethnicity Preference for Ads.} As seen in Fig.~\ref{fig:eth_ad}, \textit{Asians} show less interest in an entertaining \textit{Toyota} ad. We found out that this is because Toyota ad's entertaining factor comes from amusing conversations; while some members in the (Foreign) Asian group, who have just come to US, did not catch the full meaning of the conversation. Thus, more zapping happens for the Asian group. For another example, \textit{Hispanic} group is less interested in a more direct, food scene oriented \textit{Pizza Hut} ad. Our interview with them suggests that some of them retain their ethnic dining habit in which pizza plays a less important role. Such examples indicate that ad preference is related to a user's ethnicity group and taking this into account in ad design and targeting may help achieve better advertising effect.
+\noindent \textbf{Ethnicity-biased Ad Preference.} As seen in Fig.~\ref{fig:eth_ad}, \textit{Asians} show less interest in an entertaining \textit{Toyota} ad. We found out that this is because Toyota ad's entertaining factor comes from amusing conversations; while some members in the Asian group, who have just come to US and whose first language is not English, did not catch the full meaning of the conversation. Thus, more zapping happens for the Asian group. For another example, \textit{Hispanic} group is less interested in a more direct, food scene oriented \textit{Pizza Hut} ad. Our interview with them suggests that most of them retain their ethnic dining habit in which pizza plays a less important role. Such examples indicate that ad preference is related to a user's ethnicity group and taking this into account in ad design and targeting may help achieve better advertising effect.
 
 
 \begin{figure}[t]
 	\centering
 		\includegraphics[width=\columnwidth]{fig/eth_ad.png}
-	\caption{Two ethnicity group preference for two ads. It is observed that \textit{Hispanic} group prefers \textit{Toyota} and \textit{Foreign Asian} group prefers \textit{Pizza Hut}. See text for more discussions.}
+	\caption{Ethnicity-biased ad preference. It is observed that \textit{Asian} group is more likely to zap on \textit{Toyota} while \textit{Hispanic} group does not much enjoy \textit{Pizza Hut}.}
 	\label{fig:eth_ad}
 \end{figure}
 
@@ -344,12 +335,12 @@ As aforementioned, MMZP represents dynamics of users' interest level during the 
 \end{figure}
 
 
-\noindent \textbf{Personalized User Preference for Ads.} Targeted advertising has proven to be effective in online marketing, as evidenced by the dissemination of online personalized recommendations. We argue that the proposed MMZP can also be used as a user preference metric and therefore, has the potential to help with better personalized advertising. In Fig.~\ref{fig:adcat_id} we show three subjects' MMZP for watching ads from two categories. The decreasing MMZP towards the end of ad for subject 22 and 57 suggests that they prefer \textit{Car} ads more than \textit{Fast food} ads in which their MMZP remains high across the sequence. On the other hand, based on the change in MMZP, subject 63 is more interested in \textit{Fast food} than \textit{Car}. This observation is also confirmed by the corresponding zapping distribution in blue bars. Thus, using MMZP can provide a better understanding of personal zapping behavior, which is essential for more accurate personalized ad targeting.
+\noindent \textbf{Personalized User Preference for Ads.} Targeted advertising has proven to be effective in online marketing, as evidenced by the dissemination of online personalized recommendations. We argue that the proposed MMZP can also be used as a user preference metric and therefore, has the potential to help with better personalized advertising. In Fig.~\ref{fig:adcat_id} we show three subjects' MMZP for watching ads from two categories. The decreasing MMZP towards the end of ad for subject 22 and 57 suggests that they prefer \textit{Car} ads more than \textit{Fast food} ads in which their MMZP remains high across the sequence. On the other hand, based on the changes in MMZP, subject 63 is more interested in \textit{Fast food} than \textit{Car}. This observation is also confirmed by the corresponding ground truth zapping distribution. Thus, using MMZP can provide a better understanding of personal zapping behavior, which is essential for more accurate personalized ad targeting.
 
 
 \section{Conclusions}
 
-Online user behavior analysis plays an important role in marketing and advertising. In this paper, we have proposed a metric termed moment-to-moment zapping probability (MMZP) for user behavior modeling and understanding. To achieve this goal, users' facial expressions, specifically their smile responses, were collected while they were watching ads from different categories. Studies showed that MMZP can be predicted using the smile responses, and knowledge regarding user behavior and preference can be discovered from MMZP. The findings by analyzing the MMZP may facilitate better group-specific or even person-specific advertisement design and targeting. 
+Online user behavior analysis plays an important role in marketing and advertising. In this paper, we have proposed a metric termed moment-to-moment zapping probability (MMZP) for user behavior modeling and understanding based on users' facial expressions. Studies showed that MMZP can be predicted using the smile responses, and knowledge regarding user behavior and preference can be discovered from MMZP. The findings by analyzing the MMZP may facilitate better group-specific or even person-specific advertisement design and targeting. 
 
 
 \ifCLASSOPTIONcaptionsoff
@@ -361,12 +352,12 @@ Online user behavior analysis plays an important role in marketing and advertisi
 \bibliographystyle{IEEEtran}
 \bibliography{AdEmo}
 
-\begin{IEEEbiography}{Songfan Yang}
-(S'10-M'14) received the B.S. degree in Electrical Engineering from Sichuan University, Chengdu, China, in 2009 and the M.S. and Ph.D. degree in Electrical Engineering from University of California, Riverside. He is currently an Associate Professor of College of Electronics and Information Engineering at Sichuan University. His research interests include computer vision, pattern recognition, and affective computing. He holds the Best Entry Award of the FG 2011 Facial Expression Recognition and Analysis emotion challenge (FERA) competition.
-\end{IEEEbiography}
-
-\begin{IEEEbiography}{Le An} (S'13-M'15) received the B.Eng. degree in telecommunications engineering from Zhejiang University in China in 2006, the M.Sc. degree in electrical engineering from Eindhoven University of Technology in Netherlands in 2008, and the Ph.D. degree in electrical engineering from University of California, Riverside in USA in 2014. His research interests include image processing, computer vision, pattern recognition, and machine learning. He received the best paper award from the 2013 IEEE International Conference on Advanced Video and Signal-Based Surveillance (AVSS).
-\end{IEEEbiography}
+%\begin{IEEEbiography}{Songfan Yang}
+%(S'10-M'14) received the B.S. degree in Electrical Engineering from Sichuan University, Chengdu, China, in 2009 and the M.S. and Ph.D. degree in Electrical Engineering from University of California, Riverside. He is currently an Associate Professor of College of Electronics and Information Engineering at Sichuan University. His research interests include computer vision, pattern recognition, and affective computing. He holds the Best Entry Award of the FG 2011 Facial Expression Recognition and Analysis emotion challenge (FERA) competition.
+%\end{IEEEbiography}
+%
+%\begin{IEEEbiography}{Le An} (S'13-M'15) received the B.Eng. degree in telecommunications engineering from Zhejiang University in China in 2006, the M.Sc. degree in electrical engineering from Eindhoven University of Technology in Netherlands in 2008, and the Ph.D. degree in electrical engineering from University of California, Riverside in USA in 2014. His research interests include image processing, computer vision, pattern recognition, and machine learning. He received the best paper award from the 2013 IEEE International Conference on Advanced Video and Signal-Based Surveillance (AVSS).
+%\end{IEEEbiography}
 
 
 \end{document}
